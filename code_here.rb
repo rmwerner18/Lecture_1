@@ -20,21 +20,28 @@ def run(array)
 
     if input == "1"
         array.map do |album|
-            album[:title]
+            puts album[:title]
         end
     elsif input == "2"
         puts "Which album?"
         name = gets.chomp
-        array.find do |album|
-            album[:title] == name
-            album[:year]
+        album = array.find {|album| album[:title] == name}
+        if album
+            puts album[:year]
+        else
+            puts "Please enter a valid album"   
         end
     elsif input == "3"
         puts "Which year?"
         year = gets.chomp
-        array.collect do |album|
-            album[:year] == year
+        albums = array.select {|element| element[:year] == year.to_i} 
+        if albums
+            puts albums.each {|element| element[:name]}
+        else
+            puts "Please enter a valid year"
         end
+    else
+        puts "Please enter a valid number"
     end
 end
 
